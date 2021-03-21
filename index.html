@@ -13,10 +13,8 @@
     body {
       margin: 0;
       padding: 0;
-      width: 100vw;
-      height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
     }
 
@@ -26,7 +24,15 @@
   </style>
 </head>
 <body>
-  <button>start audio</button>
   <video id="video" width="720" height="560" autoplay muted></video>
+  <br>
+  <button>start audio</button>
+  <br>
+  <p>
+    this takes a few seconds to load and works best if your face is well lit
+    <br>
+    find the code on <a href="https://github.com/Q3-113/cam-synth">github</a>
+  </p>
+
 </body>
 </html>

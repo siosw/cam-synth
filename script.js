@@ -1,6 +1,6 @@
 // TODO: get pitch and freq from synth directly
 let pitchA = 440;
-let pitchB = 330;
+let pitchB = 293;
 let freq = 400;
 
 const video = document.getElementById('video');
@@ -76,11 +76,9 @@ function modifySynth(expressions) {
     synthA.setNote(pitchA);
     synthB.setNote(pitchB);
   } else if (strongest === 'angry') {
-    console.log(freq);
     freq += 5;
     filter.frequency.rampTo(freq, 0.1);
   } else if (strongest === 'surprised') {
-    console.log(freq);
     freq -= 5;
     filter.frequency.rampTo(freq, 0.1);
   }
