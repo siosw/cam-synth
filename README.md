@@ -1,4 +1,4 @@
-## control a synth with your webcam.
+## control a synth with your webcam
 * 📹 face detection is mostly taken from [WebDevSimplified](https://github.com/WebDevSimplified/Face-Detection-JavaScript).
 * 🎵 The Synth is built with [tone.js](https://tonejs.github.io).
 
