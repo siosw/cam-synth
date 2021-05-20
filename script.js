@@ -14,12 +14,6 @@ const distortion = new Tone.Distortion(3);
 synthA.chain(feedbackDelay, distortion, filter, Tone.Destination);
 synthB.chain(feedbackDelay, distortion, filter, Tone.Destination);
 
-document.querySelector('button')?.addEventListener('click', async () => {
-	await Tone.start()
-  synthA.triggerAttack(pitchA); 
-  synthB.triggerAttack(pitchB); 
-});
-
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -38,6 +32,11 @@ async function startVideo() {
   try {
     stream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = stream;
+    document.querySelector('button')?.addEventListener('click', async () => {
+      await Tone.start()
+      synthA.triggerAttack(pitchA); 
+      synthB.triggerAttack(pitchB); 
+    });
   } catch(err) {
     console.log(err);
   }
