@@ -28,14 +28,28 @@ async function startVideo() {
     video: true,
   };
 
+  const playButton = document.querySelector('button');
+
   let stream = null;
+  let started = false;
+
   try {
     stream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = stream;
-    document.querySelector('button')?.addEventListener('click', async () => {
-      await Tone.start()
-      synthA.triggerAttack(pitchA); 
-      synthB.triggerAttack(pitchB); 
+    playButton.addEventListener('click', async () => {
+      if (!started) {
+        await Tone.start()
+        synthA.triggerAttack(pitchA);   
+        synthB.triggerAttack(pitchB);
+        started = true; 
+        playButton.textContent = 'stop audio';
+      } else {
+        synthA.triggerRelease();
+        synthB.triggerRelease();
+        resetParams();
+        started = false;
+        playButton.textContent = 'start audio';
+      }
     });
   } catch(err) {
     console.log(err);
@@ -45,7 +59,7 @@ async function startVideo() {
 video.addEventListener('playing', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
-  const displaySize = { width: video.width, height: video.height }
+  const displaySize = { width: video.getBoundingClientRect().width, height: video.getBoundingClientRect().height }
   faceapi.matchDimensions(canvas, displaySize)
   
   setInterval(async () => {
@@ -95,6 +109,12 @@ function strongestExpression(expressions) {
   }
 
   return maxKey;
+}
+
+function resetParams() {
+  pitchA = 440;
+  pitchB = 293;
+  freq = 400;
 }
 
 
